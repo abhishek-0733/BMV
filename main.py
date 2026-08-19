@@ -1,20 +1,23 @@
+from ai.brain import ask_bmv
+
+
 print("================================")
 print("       BMV AI ASSISTANT")
 print("================================")
 print("Type 'exit' to close BMV.\n")
 
+
 while True:
     user_command = input("You: ")
 
-    if user_command.lower() == "exit":
+    if user_command.lower().strip() in ["exit", "quit", "goodbye"]:
         print("BMV: Goodbye!")
         break
 
-    elif user_command.lower() == "hello":
-        print("BMV: Hello! How can I help you?")
+    try:
+        response = ask_bmv(user_command)
+        print(f"BMV: {response}\n")
 
-    elif user_command.lower() == "what is your name":
-        print("BMV: My name is BMV. I am your personal AI assistant.")
-
-    else:
-        print("BMV: I don't understand that command yet.")
+    except Exception as error:
+        print(f"BMV: Sorry, something went wrong.")
+        print(f"Error: {error}\n")
